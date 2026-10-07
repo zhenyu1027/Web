@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>BMI計算機</title>
+        <style>
+            input{
+                display: block;
+                margin-bottom: 12px;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="formula">BMI公式：體重（公斤）除以身高（公尺）的平方</p>
+        <input class="inputHeight" placeholder="請輸入身高(公分)">
+        <input class="inputWeight" placeholder="請輸入體重(公斤)">
+        <button onclick = "calculateBMI();">計算BMI</button>
+        <p class="convertheight"></p>
+        <p class="bmi"></p>
+
+        <script>
+            function calculateBMI()
+            {
+                let height = document.querySelector(".inputHeight").value;
+                let weight = document.querySelector(".inputWeight").value;
+                let bmi;
+
+                height = Number(height);
+                height /= 100;
+
+                weight = Number(weight);
+
+                bmi = weight / height**2;
+                bmi = Math.round(bmi*100)/100; //要取到小數第二位
+                
+                document.querySelector(".convertHeight").innerHTML = `我會幫你將身高自動轉換為公尺顯示 <br/>
+                    身高：${height} 公尺`;
+                document.querySelector(".bmi").innerHTML = `BMI：${bmi}`;
+            }
+        </script>
+    </body>
+</html>
