@@ -1,0 +1,140 @@
+<html>
+    <head>
+        <title>DJ's shop</title>
+        <style>      
+            button
+            {
+                font-size:25px;
+                margin-right:10px;
+            }
+            p{
+                font-size: 30px;
+                display: inline-block;
+                margin-right:10px;
+            }
+            img{
+                height: 200px;
+                display: block;
+                margin-top:50px;
+            }
+            .cart{
+                margin-top: 50px;
+                display: block;
+                line-height: 40px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <h1>歡迎來到DJ Shop</h1>
+        <!--
+        <button onclick="
+            alert('我好帥');
+            console.log('我好英俊');"
+        >
+            按鈕
+        </button>
+        -->
+        <button onclick="
+            showCart();
+        ">購物車總額</button>
+
+        <button onclick="
+            cart.productNum = 0;
+            cart.product1.num = 0;
+            cart.product2.num = 0;
+            cart.totalPrice = 0;
+            console.log('已清空購物車');
+            showCart();
+            localStorage.removeItem('cart');
+        ">清空購物車</button>
+
+        <img src="product_images/product_image1.jpg" alt="產品圖片">
+
+        <p>$100</p>
+
+        <button onclick="
+            cart.productNum ++;
+            cart.product1.num ++;
+            cart.totalPrice += 100;
+            showCart();
+            saveCart();
+        ">加入購物車</button>
+
+        <img src="product_images/product_image2.jpg" alt="產品圖片">
+
+        <p>$200</p>
+
+        <button onclick="
+            cart.productNum ++;
+            cart.product2.num ++;
+            cart.totalPrice += 200;
+            showCart();
+            saveCart();
+        ">加入購物車</button>
+
+        <p class = "cart"></p>
+        
+        <script>
+            let cart = JSON.parse(localStorage.getItem("cart"));
+
+            if(cart===null)   
+            {
+                cart =
+                {
+                    productNum: 0,
+                    product1:
+                    {
+                        num: 0,
+                        name: "海底撈小火鍋",
+                        price: 100
+                    },
+                    product2:
+                    {
+                        num: 0,
+                        name: "桂格養氣人蔘",
+                        price: 200
+                    },
+                    totalPrice: 0,
+                    // showCart:function showCart() 也可以寫成 
+                    // showCart()
+                    // {
+                    //     console.log('商品總數：' + cart.productNum);
+                    //     console.log(`${cart.product1.name}：${cart.product1.num}`);
+                    //     console.log(`${cart.product2.name}：${cart.product2.num}`);
+                    //     console.log('購物車總和：' + cart.totalPrice);
+                    // }
+                }
+            }
+            
+            showCart();
+
+            
+            function showCart()
+            {
+                
+                document.querySelector(".cart").innerHTML = `
+                    商品總數：${cart.productNum} <br/>
+                    ${cart.product1.name}：${cart.product1.num} <br/>
+                    ${cart.product2.name}：${cart.product2.num} <br/>
+                    購物車總和：${cart.totalPrice} <br/>
+                `
+            }
+
+            function saveCart()
+            {
+                const jsonCart = JSON.stringify(cart);
+                // console.log(jsonCart);
+                localStorage.setItem("cart",jsonCart);
+            }
+            // let name = "賓速";
+            // let age = 6;
+            // let des = `賓速今年${age+1}歲`;  //反引號 可以直接做換行
+
+            // console.log(des);
+            // alert("我好帥");
+            // console.log(name);
+            // console.log(name + "今年" + age + "歲");
+        </script>
+    </body>
+</html>

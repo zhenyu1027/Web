@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>DJ's shop 後台</title>
+        <style>
+            .inputName
+            {
+                width:130px;
+            }
+            .inputPrice
+            {
+                width:100px;
+            }
+            .product-grid
+            {
+                margin-top:20px;
+                display: grid;
+                grid-template-columns: 112px 112px 50px;
+                row-gap: 10px;
+            }
+        </style>    
+    </head>
+    <body>
+        <input class="inputName" placeholder="輸入商品名稱">
+        <input class="inputPrice" placeholder="輸入商品價格">
+        <button onclick="addProduct();">新增</button>
+        <div class="product-grid"></div>
+
+        <script>
+            let products = [];
+
+            function addProduct()
+            {
+                const inputName = document.querySelector(".inputName"); //innerHTML 讀的是「開始標籤和結束標籤之間」的內容，<input> 沒有「之間」
+                const inputPrice = document.querySelector(".inputPrice");
+
+                console.log(inputName.value);
+                console.log(typeof inputName);
+                console.log(inputPrice.value);
+
+                products.push
+                (
+                    {
+                        name : inputName.value,
+                        price : inputPrice.value
+                    }
+                );
+                inputName.value = "";
+                inputPrice.value = "";
+
+                rederProduct()
+                console.log(products);
+            }
+
+            function removeProduct(i)
+            {
+                products.splice(i,1);
+
+                rederProduct()
+                console.log(products);
+            }
+
+            function rederProduct()
+            {
+                let html = "";
+                 for(let i=0; i<products.length; i++)
+                {
+                    html +=`
+                    <div>${products[i].name}</div>
+                    <div>${products[i].price}</div>
+                    <button onclick="removeProduct(${i});">刪除</button>
+                    `;
+                }
+
+                document.querySelector(".product-grid").innerHTML = html;
+            }
+
+        </script>
+    </body>
+</html>
